@@ -5,4 +5,21 @@ class QuestionsTest < ApplicationSystemTestCase
     visit ask_url
     assert_selector "p", text: "Ask your coach anything"
   end
+
+  test "saying Hello yields a grumpy response from the coach" do
+    visit ask_url
+    fill_in "question", with: "Hello"
+    click_on "Ask"
+
+    assert_text "I don't care, get dressed and go to work!"
+  end
+
+  test "asking a question yields another grumpy response from the coach" do
+    visit ask_url
+    fill_in "question", with: "anything ending with a?"
+    click_on "Ask"
+
+    assert_text "Silly question, get dressed and go to work!"
+    take_screenshot
+  end
 end
